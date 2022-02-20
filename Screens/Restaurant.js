@@ -92,7 +92,10 @@ export default function Restaurant({ route, navigation }) {
                 pagingEnabled
                 scrollEventThrottle={15}
                 showsHorizontalScrollIndicator={false}
-            //onscroll
+                //onscroll
+                onScroll={Animated.event([
+                    { nativeEvent: { contentOffset: { x: ScrollX } } }
+                ], { useNativeDriver: false })}
             >
                 {
                     restaurant?.menu.map((item, index) => (
@@ -213,11 +216,76 @@ export default function Restaurant({ route, navigation }) {
             </Animated.ScrollView >
         )
     }
-    
+
+    function renderDots() {
+        const dotPosition = Animated.divide(ScrollX, SIZES.width);
+
+        return (
+            <View
+                style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    height: 20
+                }}
+            >
+                {
+                    restaurant?.menu.map((item, index) => {
+                        const opacity = dotPosition.interpolate({
+                            inputRange: [index - 1, index, index + 1],
+                            outputRange: [0.3, 1, 0.3],
+                            extrapolate: "clamp"
+                        })
+
+                        const dotSize = dotPosition.interpolate({
+                            inputRange: [index - 1, index, index + 1],
+                            outputRange: [SIZES.base * 0.8, 10, SIZES.base * 0.8],
+                            extrapolate: "clamp"
+                        })
+
+                        const dotColor = dotPosition.interpolate({
+                            inputRange: [index - 1, index, index + 1],
+                            outputRange: [COLORS.darkgray, COLORS.primary, COLORS.darkgray],
+                            extrapolate: "clamp"
+                        })
+                        return (
+                            <Animated.View
+                                key={`dot-${index}`}
+                                opacity={opacity}
+                                style={{
+                                    borderRadius: 30,
+                                    marginHorizontal: 6,
+                                    width: dotSize,
+                                    height: dotSize,
+                                    backgroundColor: dotColor
+                                }}
+                            >
+
+                            </Animated.View>
+                        )
+                    })
+                }
+
+            </View>
+        )
+    }
+
+    function renderOrder() {
+        return (
+            <View>
+                {
+                    renderDots()
+                }
+            </View>
+        )
+    }
+
+
     return (
         <SafeAreaView style={styles.container}>
             {renderHeader()}
             {renderFoodInfo()}
+            {renderOrder()}
         </SafeAreaView>
 
     )

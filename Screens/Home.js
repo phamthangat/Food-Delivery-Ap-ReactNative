@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { icons, images, SIZES, COLORS, FONTS } from '../constants';
 import { Entypo, AntDesign } from "@expo/vector-icons";
 
-export default function Home() {
+export default function Home({navigation}) {
 
     const initialCurrentLocation = {
         streetName: "Big C",
@@ -118,7 +118,7 @@ export default function Home() {
         },
         {
             id: 2,
-            name: "ByProgrammers Pizza",
+            name: "ByProgrammers Pizza", 
             rating: 4.8,
             categories: [2, 4, 6],
             priceRating: expensive,
@@ -448,15 +448,15 @@ export default function Home() {
             </View>
         )
     }
-
+ 
     function renderRestaurantList() {
         const renderItem = ({ item }) => (
             <TouchableOpacity
                 style={{ marginBottom: 20 }}
-            // onPress={() => navigation.navigate("Restaurant", {
-            //     item,
-            //     currentLocation
-            // })}
+            onPress={() => navigation.navigate("Restaurant", {
+                item,
+                currentLocation
+            })}
             >
                 <View
                     style={{

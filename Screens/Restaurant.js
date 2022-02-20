@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Text, View, Image, StyleSheet, TouchableOpacity, SafeAreaView, Animated } from "react-native";
-import { color } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
+import { borderBottomColor, color } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 import { icons, images, SIZES, COLORS, FONTS } from '../constants';
 
 export default function Restaurant({ route, navigation }) {
@@ -276,6 +276,102 @@ export default function Restaurant({ route, navigation }) {
                 {
                     renderDots()
                 }
+                <View
+                    style={{
+                        backgroundColor: COLORS.white,
+                        borderTopLeftRadius: 40,
+                        borderTopRightRadius: 40
+                    }}
+                >
+                    <View
+                        style={{
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            paddingVertical: 20,
+                            paddingHorizontal: 30,
+                            borderBottomColor: COLORS.lightGray2,
+                            borderBottomWidth: 1
+                        }}
+                    >
+                        <Text style={{ fontWeight: "bold" }}>item in Cart</Text>
+                        <Text style={{ fontWeight: "bold" }}>45$</Text>
+                    </View>
+
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            paddingVertical: 20,
+                            paddingHorizontal: 30
+                        }}>
+                        <View style={{ flexDirection: "row" }}>
+                            <Image
+                                source={icons.pin}
+                                resizeMode="contain"
+                                style={{
+                                    width: 20,
+                                    height: 20,
+                                    tintColor: COLORS.darkgray
+                                }}
+                            />
+                            <Text
+                                style={{
+                                    fontWeight: "bold",
+                                    marginLeft: 10
+                                }}
+                            >
+                                Location
+                            </Text>
+                        </View>
+
+                        <View style={{ flexDirection: "row" }}>
+                            <Image
+                                source={icons.master_card}
+                                resizeMode="contain"
+                                style={{
+                                    width: 20,
+                                    height: 20,
+                                    tintColor: COLORS.darkgray
+                                }}
+                            />
+                            <Text style={{ fontWeight: "bold", marginLeft: 10 }}>12345678</Text>
+                        </View>
+
+                    </View>
+
+                    {/* order button */}
+
+                    <View
+                        style={{
+                            padding: 20,
+                            alignItems: "center",
+                            justifyContent: "center"
+                        }}
+                    >
+                        <TouchableOpacity
+                            style={{
+                                width: SIZES.width * 0.9,
+                                padding: 10,
+                                backgroundColor: COLORS.primary,
+                                alignItems: "center",
+                                borderRadius: 30
+                            }}
+                        >
+                            <Text
+                            style={{
+                                color:COLORS.white,
+                                fontSize: 22,
+                                fontWeight:"bold"
+
+                            }}
+                            >
+                                Order
+                            </Text>
+                        </TouchableOpacity>
+
+                    </View>
+
+                </View>
             </View>
         )
     }

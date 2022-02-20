@@ -7,7 +7,7 @@ import { Entypo, AntDesign } from "@expo/vector-icons";
 export default function Home({navigation}) {
 
     const initialCurrentLocation = {
-        streetName: "Big C",
+        streetName: "Thang pham",
         gps: {
             latitude: 21.007897747312246,
             longitude: 105.79293322383194
@@ -365,7 +365,7 @@ export default function Home({navigation}) {
                         alignItems: "center",
                         borderRadius: 30
                     }}>
-                        <Text style={{ fontSize: 15, lineHeight: 22 }}>{currentLocation.streetName}</Text>
+                        <Text style={{ fontSize: 15, lineHeight: 22, fontWeight:"bold" }}>{currentLocation.streetName}</Text>
                     </View>
                 </View>
 

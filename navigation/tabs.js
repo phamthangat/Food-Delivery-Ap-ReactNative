@@ -22,6 +22,7 @@ export default function Tabs() {
           },
         }}
       />
+      
       <Tab.Screen
         name="Like"
         component={Home}

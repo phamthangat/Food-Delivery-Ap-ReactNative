@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, Image, StyleSheet, TouchableOpacity, SafeAreaView, Animated } from "react-native";
+import { Text, View, Image, StyleSheet, TouchableOpacity, SafeAreaView, Animated, Alert } from "react-native";
 import { borderBottomColor, color } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 import { icons, images, SIZES, COLORS, FONTS } from '../constants';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Restaurant({ route, navigation }) {
 
@@ -20,6 +21,7 @@ export default function Restaurant({ route, navigation }) {
 
     function editOrder(action, menuId, price) {
         let orderList = orderItems.slice();
+        // console.log(orderList,"orderList1");
         let item = orderList.filter(a => a.menuId == menuId);
 
         if (action == "+") {
@@ -47,6 +49,7 @@ export default function Restaurant({ route, navigation }) {
             }
             setOrderItems(orderList)
         }
+        addToCart(orderList);
 
     }
 
@@ -324,6 +327,19 @@ export default function Restaurant({ route, navigation }) {
             </View>
         )
     }
+    function addToCart(orderList) {
+        console.log(orderList, "orderList");
+        // Alert.alert("Order success!!")
+        if (AsyncStorage.getItem("cart") === null) {
+            console.log("no in storage");
+            const cart = orderList;
+            AsyncStorage.setItem("cart", JSON.stringify(cart))
+        } else {
+            console.log("in storage");
+            const cart = orderList;
+            AsyncStorage.setItem("cart", JSON.stringify(cart))
+        }
+    }
 
     function renderOrder() {
         return (
@@ -411,6 +427,7 @@ export default function Restaurant({ route, navigation }) {
                                 alignItems: "center",
                                 borderRadius: 30
                             }}
+                            onPress={() => addToCart()}
                         >
                             <Text
                                 style={{

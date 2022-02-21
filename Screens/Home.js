@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { icons, images, SIZES, COLORS, FONTS } from '../constants';
 import { Entypo, AntDesign } from "@expo/vector-icons";
 
-export default function Home({navigation}) {
+export default function Home({ navigation }) {
 
     const initialCurrentLocation = {
         streetName: "Thang pham",
@@ -118,7 +118,7 @@ export default function Home({navigation}) {
         },
         {
             id: 2,
-            name: "ByProgrammers Pizza", 
+            name: "ByProgrammers Pizza",
             rating: 4.8,
             categories: [2, 4, 6],
             priceRating: expensive,
@@ -365,17 +365,20 @@ export default function Home({navigation}) {
                         alignItems: "center",
                         borderRadius: 30
                     }}>
-                        <Text style={{ fontSize: 15, lineHeight: 22, fontWeight:"bold" }}>{currentLocation.streetName}</Text>
+                        <Text style={{ fontSize: 15, lineHeight: 22, fontWeight: "bold" }}>{currentLocation.streetName}</Text>
                     </View>
                 </View>
 
-                <TouchableOpacity style={{
-                    width: 50,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    paddingRight: 20
-                }}>
-                    <AntDesign name="shoppingcart" size={24} color="black" />
+                <TouchableOpacity
+                    style={{
+                        width: 50,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        paddingRight: 20
+                    }}
+                    onPress={() => navigation.navigate("Cart")}
+                >
+                    <AntDesign name="shoppingcart" size={24} color="black"  />
                 </TouchableOpacity>
             </View>
         )
@@ -448,15 +451,15 @@ export default function Home({navigation}) {
             </View>
         )
     }
- 
+
     function renderRestaurantList() {
         const renderItem = ({ item }) => (
             <TouchableOpacity
                 style={{ marginBottom: 20 }}
-            onPress={() => navigation.navigate("Restaurant", {
-                item,
-                currentLocation
-            })}
+                onPress={() => navigation.navigate("Restaurant", {
+                    item,
+                    currentLocation
+                })}
             >
                 <View
                     style={{
